@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanvi Swamy | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d12;
+    --surface: #13131a;
+    --card: #1a1a24;
+    --accent: #c084fc;
+    --accent2: #e879f9;
+    --accent3: #67e8f9;
+    --text: #f0f0f8;
+    --muted: #888899;
+    --border: rgba(192, 132, 252, 0.18);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 3rem;
+    background: rgba(13,13,18,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 0.02em;
+  }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav a {
+    color: var(--muted); text-decoration: none; font-size: 0.85rem;
+    letter-spacing: 0.08em; text-transform: uppercase; font-weight: 400;
+    transition: color 0.25s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 6rem 2rem 3rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(192,132,252,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(103,232,249,0.1) 0%, transparent 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(192,132,252,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(192,132,252,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 1; text-align: center; max-width: 800px; }
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid var(--border);
+    background: rgba(192,132,252,0.08);
+    color: var(--accent);
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.4rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem;
+    animation: fadeup 0.8s ease both;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 9vw, 6.5rem);
+    font-weight: 900; line-height: 1.05;
+    background: linear-gradient(135deg, #f0f0f8 30%, var(--accent) 70%, var(--accent3) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: fadeup 0.8s 0.15s ease both;
+  }
+  .hero-sub {
+    font-size: 1.15rem; color: var(--muted); margin-top: 1.2rem;
+    font-weight: 400; letter-spacing: 0.02em;
+    animation: fadeup 0.8s 0.3s ease both;
+  }
+  .hero-cta {
+    margin-top: 2.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeup 0.8s 0.45s ease both;
+  }
+  .btn {
+    padding: 0.75rem 2rem; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 500; cursor: pointer; text-decoration: none;
+    letter-spacing: 0.03em; transition: all 0.25s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; border: none;
+    box-shadow: 0 0 24px rgba(192,132,252,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(192,132,252,0.55); }
+  .btn-outline {
+    background: transparent; border: 1px solid var(--border); color: var(--text);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700; line-height: 1.2; margin-bottom: 2.5rem;
+  }
+  .divider {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px; margin-bottom: 2.5rem;
+  }
+
+  /* ABOUT */
+  #about .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+  }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.97rem; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--accent), var(--accent3));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-label { color: var(--muted); font-size: 0.78rem; margin-top: 0.2rem; letter-spacing: 0.05em; }
+  .about-visual {
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .avatar-ring {
+    width: 260px; height: 260px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent3));
+    padding: 3px; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 60px rgba(192,132,252,0.25);
+  }
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: var(--card);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem;
+  }
+  .avatar-emoji { font-size: 5rem; }
+  .avatar-name {
+    font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* SKILLS */
+  #skills { background: var(--surface); max-width: 100%; padding: 5rem 2rem; }
+  #skills .inner { max-width: 1100px; margin: 0 auto; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-category {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .skill-category:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .skill-cat-title {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 1.2rem; color: var(--accent);
+  }
+  .skill-pill {
+    display: inline-block; background: rgba(192,132,252,0.1);
+    border: 1px solid rgba(192,132,252,0.2); color: var(--text);
+    padding: 0.35rem 0.9rem; border-radius: 50px; font-size: 0.82rem; margin: 0.25rem;
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem;
+    position: relative; overflow: hidden; transition: all 0.3s;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+  }
+  .project-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .project-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+  .project-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .project-role {
+    display: inline-block; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.2);
+    padding: 0.25rem 0.75rem; border-radius: 50px; margin-bottom: 0.75rem;
+  }
+  .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+  /* EDUCATION */
+  #education { background: var(--surface); max-width: 100%; padding: 5rem 2rem; }
+  #education .inner { max-width: 1100px; margin: 0 auto; }
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem;
+    display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;
+    max-width: 700px;
+  }
+  .edu-year {
+    font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--accent);
+    font-weight: 700; letter-spacing: 0.08em; writing-mode: vertical-rl;
+    text-orientation: mixed; transform: rotate(180deg); white-space: nowrap;
+  }
+  .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .edu-college { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
+  .cgpa-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(192,132,252,0.15), rgba(103,232,249,0.1));
+    border: 1px solid rgba(192,132,252,0.3); border-radius: 8px; padding: 0.6rem 1.2rem;
+  }
+  .cgpa-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--accent); }
+  .cgpa-label { font-size: 0.78rem; color: var(--muted); }
+  .edu-grade { color: var(--accent3); font-size: 0.85rem; margin-top: 0.75rem; }
+
+  /* ACHIEVEMENTS */
+  .ach-list { display: grid; gap: 1rem; }
+  .ach-item {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.4rem 1.8rem; display: flex; align-items: center; gap: 1.2rem;
+    transition: all 0.3s;
+  }
+  .ach-item:hover { border-color: var(--accent); transform: translateX(4px); }
+  .ach-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .ach-text { font-size: 0.93rem; color: var(--muted); line-height: 1.5; }
+  .ach-text strong { color: var(--text); display: block; font-weight: 500; margin-bottom: 0.1rem; }
+
+  /* RESUME */
+  #resume { text-align: center; }
+  .resume-box {
+    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+    padding: 3.5rem; display: inline-block; max-width: 500px; width: 100%;
+  }
+  .resume-icon { font-size: 4rem; margin-bottom: 1.2rem; }
+  .resume-box p { color: var(--muted); margin-bottom: 2rem; line-height: 1.7; font-size: 0.95rem; }
+
+  /* CONTACT */
+  #contact { background: var(--surface); max-width: 100%; padding: 5rem 2rem; }
+  #contact .inner { max-width: 1100px; margin: 0 auto; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem;
+  }
+  .contact-item-icon { font-size: 1.4rem; }
+  .contact-item-text { font-size: 0.9rem; }
+  .contact-item-label { color: var(--muted); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .contact-item-value { color: var(--text); margin-top: 0.15rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .form-input, .form-textarea {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    padding: 0.85rem 1rem; outline: none; transition: border-color 0.25s;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { resize: vertical; min-height: 120px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem;
+    border-top: 1px solid var(--border); color: var(--muted);
+    font-size: 0.82rem; letter-spacing: 0.05em;
+  }
+  footer span { color: var(--accent); }
+
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 700px) {
+    nav ul { display: none; }
+    nav { padding: 1rem 1.5rem; }
+    #about .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .about-visual { order: -1; }
+    .avatar-ring { width: 180px; height: 180px; }
+    .avatar-emoji { font-size: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Tanvi Swamy</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="home" style="max-width:100%; padding:0;">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">✦ Computer Science Engineer</div>
+    <h1 class="hero-name">Tanvi Swamy</h1>
+    <p class="hero-sub">B.E. Student · ML Enthusiast · Design Head at ACM × PCCOER</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">Who I Am</div>
+  <h2 class="section-title">About Me</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Hi! I'm Tanvi Swamy, a 3rd year Computer Science Engineering student at PCCOER, Pune. I'm passionate about technology, machine learning, and design — always excited to learn and build something meaningful.</p>
+      <p>I've been recognized for academic excellence with a CGPA of 9.22, securing A/O grades across all subjects. Beyond academics, I love leading teams and contributing to the tech community as Design Head at the ACM × PCCOER Student Chapter.</p>
+      <p>My journey spans from working with ML models to leading cross-functional project teams — I'm driven by curiosity and a love for problem-solving.</p>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">9.22</div>
+          <div class="stat-label">Current CGPA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">A/O</div>
+          <div class="stat-label">Grades in All Subjects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3rd</div>
+          <div class="stat-label">Year · CSE</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="avatar-ring">
+        <div class="avatar-inner">
+          <div class="avatar-emoji">👩‍💻</div>
+          <div class="avatar-name">Tanvi Swamy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="max-width:100%;">
+  <div class="inner">
+    <div class="section-label">What I Know</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="divider"></div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-title">💻 Programming Languages</div>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">C++</span>
+        <span class="skill-pill">Java</span>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">🗃️ Databases</div>
+        <span class="skill-pill">SQL (MySQL)</span>
+        <span class="skill-pill">NoSQL (MongoDB)</span>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">📚 Core CS Concepts</div>
+        <span class="skill-pill">Data Structures & Algorithms</span>
+        <span class="skill-pill">DBMS</span>
+        <span class="skill-pill">OOP</span>
+        <span class="skill-pill">Computer Networks</span>
+        <span class="skill-pill">HCI</span>
+        <span class="skill-pill">Computer Graphics</span>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">🌟 Soft Skills</div>
+        <span class="skill-pill">Team Leadership</span>
+        <span class="skill-pill">Communication</span>
+        <span class="skill-pill">Time Management</span>
+        <span class="skill-pill">Project Planning</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">What I've Built</div>
+  <h2 class="section-title">Projects</h2>
+  <div class="divider"></div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">🌿</div>
+      <div class="project-role">Team Leader</div>
+      <div class="project-title">Water Hyacinth to Biodiesel</div>
+      <p class="project-desc">Led a team to develop a process for converting water hyacinth — an invasive aquatic plant — into biodiesel. Coordinated project planning and task distribution, and developed documentation and presentation skills through this sustainability initiative.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">🧠</div>
+      <div class="project-role">ML Developer</div>
+      <div class="project-title">Autism Detection using ML</div>
+      <p class="project-desc">Built a machine learning model to aid in the detection of autism spectrum disorder. Involved end-to-end data collection, preprocessing, model training using ML algorithms, and presenting findings with data visualizations.</p>
+    </div>
+  </div>
+</section>
+
+<section id="education" style="max-width:100%;">
+  <div class="inner">
+    <div class="section-label">My Academic Journey</div>
+    <h2 class="section-title">Education</h2>
+    <div class="divider"></div>
+    <div class="edu-card">
+      <div class="edu-year">2022 – Present</div>
+      <div>
+        <div class="edu-degree">B.E. in Computer Science Engineering</div>
+        <div class="edu-college">Pimpri Chinchwad College of Engineering and Research (PCCOER), Pune</div>
+        <div class="cgpa-badge">
+          <div>
+            <div class="cgpa-num">9.22</div>
+          </div>
+          <div class="cgpa-label">CGPA<br>(Current)</div>
+        </div>
+        <div class="edu-grade">🏆 Secured A/O grades in all subjects · 3rd Year</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="section-label">Recognition & Activities</div>
+  <h2 class="section-title">Achievements & Certifications</h2>
+  <div class="divider"></div>
+  <div class="ach-list">
+    <div class="ach-item">
+      <div class="ach-icon">🏅</div>
+      <div class="ach-text">
+        <strong>IIT Bombay Techfest — Introduction to ML Workshop</strong>
+        Certificate of participation (Certificate Awaited) from India's premier technical festival.
+      </div>
+    </div>
+    <div class="ach-item">
+      <div class="ach-icon">🎨</div>
+      <div class="ach-text">
+        <strong>Design Head — ACM × PCCOER Student Chapter</strong>
+        Leading the design initiatives and visual identity of the ACM student chapter at PCCOER.
+      </div>
+    </div>
+    <div class="ach-item">
+      <div class="ach-icon">🌿</div>
+      <div class="ach-text">
+        <strong>Team Leader — FE Water Hyacinth to Biodiesel Project</strong>
+        Successfully led a multi-member team in a sustainability-focused engineering project.
+      </div>
+    </div>
+    <div class="ach-item">
+      <div class="ach-icon">🎓</div>
+      <div class="ach-text">
+        <strong>Academic Excellence — A/O Grades Across All Subjects</strong>
+        Maintained consistent top-tier academic performance with a CGPA of 9.22 at PCCOER.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resume">
+  <div class="section-label">Download</div>
+  <h2 class="section-title">Resume</h2>
+  <div class="divider" style="margin: 0 auto 2.5rem;"></div>
+  <div class="resume-box">
+    <div class="resume-icon">📄</div>
+    <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Tanvi Swamy — CV</h3>
+    <p>My resume covers my education, technical skills, project experience, and extracurricular activities. Feel free to download and connect with me!</p>
+    <a href="TANVI_CV.PDF" download class="btn btn-primary" style="display:inline-block;">⬇ Download Resume</a>
+  </div>
+</section>
+
+<section id="contact" style="max-width:100%;">
+  <div class="inner">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Contact Me</h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">tanvi.swamy_comp23@pccoer.in</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-value">7517604334</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">Pune, Maharashtra, India</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🎓</div>
+          <div class="contact-item-text">
+            <div class="contact-item-label">College</div>
+            <div class="contact-item-value">PCCOER, Pimpri Chinchwad</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Write your message..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="alert('Message noted! Connect via email for now 💜')">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Made with 💜 by <span>Tanvi Swamy</span> · B.E. Computer Science · PCCOER · 2025
+</footer>
+
+</body>
+</html>
